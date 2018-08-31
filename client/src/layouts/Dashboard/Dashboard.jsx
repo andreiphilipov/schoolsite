@@ -65,6 +65,11 @@ class App extends React.Component {
   componentWillUnmount() {
     window.removeEventListener("resize", this.resizeFunction);
   }
+  add_name(){
+    if('add_school' != ""){
+      alert ('no school no add');
+    }
+  }
   render() {
     const { classes, ...rest } = this.props;
     return (

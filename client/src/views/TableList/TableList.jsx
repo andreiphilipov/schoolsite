@@ -48,15 +48,41 @@ function TableList(props) {
           <CardHeader color="primary">
             <h4 className={classes.cardTitleWhite}>Simple Table</h4>
             <p className={classes.cardCategoryWhite}>
-              Here is a supliments for everyschool
+              Here is a supliments for every school
             </p>
-          </CardHeader>         
+          </CardHeader>
           <CardBody>
             <Table
               tableHeaderColor="primary"
-              tableHead={["ID", "Name", "Year", "Month", "Date", "Electricity ($)", "Heat ($)", "Water ($)", "Heat (Kwh),", "Water (Kwh)", "Water (L)", "Action"]}
+              tableHead={[
+                "ID",
+                "Name",
+                "Year",
+                "Month",
+                "Date",
+                "Electricity ($)",
+                "Heat ($)",
+                "Water ($)",
+                "Heat (Kwh),",
+                "Water (Kwh)",
+                "Water (L)",
+                "Action"
+              ]}
               tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738", "Niger", "Oud-Turnhout", "$36,738", "Niger", "Oud-Turnhout", "$36,738", "$36,738",""]
+                [
+                  "Dakota Rice",
+                  "Niger",
+                  "Oud-Turnhout",
+                  "$36,738",
+                  "Niger",
+                  "Oud-Turnhout",
+                  "$36,738",
+                  "Niger",
+                  "Oud-Turnhout",
+                  "$36,738",
+                  "$36,738",
+                  ""
+                ]
               ]}
             />
           </CardBody>
@@ -65,9 +91,7 @@ function TableList(props) {
       <GridItem xs={12} sm={12} md={12}>
         <Card>
           <CardHeader color="danger">
-            <h4 className={classes.cardTitleWhite}>
-              Over / Lacking Table
-            </h4>
+            <h4 className={classes.cardTitleWhite}>Over / Lacking Table</h4>
             <p className={classes.cardCategoryWhite}>
               Here is equivalents for every school
             </p>
@@ -75,9 +99,35 @@ function TableList(props) {
           <CardBody>
             <Table
               tableHeaderColor="danger"
-              tableHead={["ID", "Name", "Year", "Month", "Date", "Electricity ($)", "Heat ($)", "Water ($)", "Heat (Kwh),", "Water (Kwh)", "Water (L)", "Action"]}
+              tableHead={[
+                "ID",
+                "Name",
+                "Year",
+                "Month",
+                "Date",
+                "Electricity ($)",
+                "Heat ($)",
+                "Water ($)",
+                "Heat (Kwh),",
+                "Water (Kwh)",
+                "Water (L)",
+                "Action"
+              ]}
               tableData={[
-                ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738", "Niger", "Oud-Turnhout", "$36,738", "Niger", "Oud-Turnhout", "$36,738", "$36,738",""]
+                [
+                  "Dakota Rice",
+                  "Niger",
+                  "Oud-Turnhout",
+                  "$36,738",
+                  "Niger",
+                  "Oud-Turnhout",
+                  "$36,738",
+                  "Niger",
+                  "Oud-Turnhout",
+                  "$36,738",
+                  "$36,738",
+                  ""
+                ]
               ]}
             />
           </CardBody>

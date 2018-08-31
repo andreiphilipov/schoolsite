@@ -44,8 +44,9 @@ const styles = {
     }
   }
 };
+  
 
-class Notifications extends React.Component {
+class Addschool extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -58,14 +59,17 @@ class Notifications extends React.Component {
     };
     this.lertTimeout = null;
   }
+  add_name(){
+    console.log('add_school');
+  }
   componentWillUnmount() {
     this.clearAlertTimeout();
-  }
+  } 
   clearAlertTimeout() {
     if (this.alertTimeout !== null) {
       clearTimeout(this.alertTimeout);
     }
-  }
+  }  
   showNotification(place) {
     var x = [];
     x[place] = true;
@@ -102,15 +106,17 @@ class Notifications extends React.Component {
                 />
               </GridItem>
               <GridItem xs={12} sm={12} md={3}>
+                <script>var add_school = document.getElementById('add_school');</script>
                 <Button
                   fullWidth
                   color="primary"
-                  onClick={this.add_name(add_school.id)}>
+                  onClick={this.add_name.bind(this)}
+                >
                   Add
                 </Button>
                 <Button
                   fullWidth
-                  color="danger"
+                  color="danger"                  
                 >
                   Refresh
                 </Button>
@@ -139,5 +145,4 @@ class Notifications extends React.Component {
     );
   }
 }
-
-export default withStyles(styles)(Notifications);
+export default withStyles(styles)(Addschool);
