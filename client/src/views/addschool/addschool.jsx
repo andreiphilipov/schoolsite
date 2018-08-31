@@ -1,4 +1,3 @@
-
 /* eslint-disable */
 import React from "react";
 // @material-ui/core components
@@ -6,7 +5,6 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
 import AddAlert from "@material-ui/icons/AddAlert";
 // core components
-
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
@@ -89,7 +87,6 @@ class Notifications extends React.Component {
           <h4 className={classes.cardTitleWhite}>{"Add New School"}</h4>
           <p className={classes.cardCategoryWhite}>
             Write here then find on sidebar{" "}
-            
           </p>
         </CardHeader>
         <CardBody>
@@ -100,43 +97,43 @@ class Notifications extends React.Component {
                   labelText="Add school Name"
                   id="add_school"
                   formControlProps={{
-                    fullWidth: true
+                  fullWidth: true
                   }}
                 />
               </GridItem>
-              <GridItem xs={12} sm={12} md={3}>           
+              <GridItem xs={12} sm={12} md={3}>
                 <Button
                   fullWidth
                   color="primary"
-                  onClick={() => this.showNotification("br")}>
+                  onClick={this.add_name(add_school.id)}>
                   Add
                 </Button>
                 <Button
                   fullWidth
                   color="danger"
-                  onClick={() => this.render}>
+                >
                   Refresh
-                </Button>                 
+                </Button>
               </GridItem>
-            </GridContainer>          
+            </GridContainer>
             <GridContainer justify="center">
               <GridItem xs={12} sm={12} md={10} lg={8}>
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={4}>
-                  <Snackbar
+                    <Snackbar
                       place="br"
                       color="info"
                       icon={AddAlert}
-                      message="Please wait a."
+                      message="loading..."
                       open={this.state.br}
-                      closeNotification={() => this.setState({ br: false })}
+                      closeNotification={() => this.setState({ br: true })}
                       close
                     />
-                  </GridItem>               
+                  </GridItem>
                 </GridContainer>
               </GridItem>
             </GridContainer>
-          </form>          
+          </form>
         </CardBody>
       </Card>
     );
