@@ -5,9 +5,9 @@ import withStyles from "@material-ui/core/styles/withStyles";
 // @material-ui/icons
 import AddAlert from "@material-ui/icons/AddAlert";
 // core components
+import CustomInput from "components/CustomInput/CustomInput.jsx";
 import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
 import Snackbar from "components/Snackbar/Snackbar.jsx";
 import Card from "components/Card/Card.jsx";
@@ -43,27 +43,28 @@ const styles = {
     }
   }
 };
-  
 
-class Addschool extends React.Component {
+class AddSchool extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
-     };
+      tl: false,
+      tc: false,
+      tr: false,
+      bl: false,
+      bc: false,
+      br: false
+    };
     this.lertTimeout = null;
-  }
-  add_name(){
-    fetch()
   }
   componentWillUnmount() {
     this.clearAlertTimeout();
-  } 
+  }
   clearAlertTimeout() {
     if (this.alertTimeout !== null) {
       clearTimeout(this.alertTimeout);
     }
-  }  
+  }
   showNotification(place) {
     var x = [];
     x[place] = true;
@@ -74,71 +75,91 @@ class Addschool extends React.Component {
         x[place] = false;
         this.setState(x);
       }.bind(this),
-      6000
+      1000
     );
+  }
+  handleSubmit() {
+    var xhr = new XMLHttpRequest();
+    var url = "http://localhost:3000/api/name";
+    var name = document.getElementById('add_school').value
+    
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      }
+    };
+    var data = JSON.stringify({"name": name});
+    xhr.send(data);
   }
   render() {
     const { classes } = this.props;
     return (
       <Card>
         <CardHeader color="primary">
-          <h4 className={classes.cardTitleWhite}>{"Add New School"}</h4>
+          <h4 className={classes.cardTitleWhite}>Add school</h4>
           <p className={classes.cardCategoryWhite}>
-            Write here then find on sidebar{" "}
+            You can write here and find them on left side.{" "}
           </p>
         </CardHeader>
         <CardBody>
-          <form>
-            <GridContainer>
-              <GridItem xs={12} sm={12} md={9}>
-                <CustomInput
-                  labelText="Add school Name"                  
-                  formControlProps={{
+          <form onSubmit={this.handleSubmit}>
+          <GridContainer justify="center">
+            <GridItem xs={12} sm={12} md={9} style={{ textAlign: "center" }}>
+              <CustomInput
+                labelText="Add schoolname"
+                id="add_school"
+                formControlProps={{
                   fullWidth: true
-                  }}                  
-                  {props.messages.length && <MessageList messages={props.messages} /> }
-                />
-              </GridItem>
-              <GridItem xs={12} sm={12} md={3}>
-                <script>var add_school = document.getElementById('add_school');</script>
-                <Button
-                  fullWidth
-                  color="primary"
-                  id="add_school"
-                  name="add_school"
-                  onClick={this.add_name.bind(this.add_school)}
-                >
-                  Add
-                </Button>
-                <Button
-                  fullWidth
-                  color="danger"                  
-                >
-                  Refresh
-                </Button>
-              </GridItem>
-            </GridContainer>
-            <GridContainer justify="center">
-              <GridItem xs={12} sm={12} md={10} lg={8}>
-                <GridContainer>
-                  <GridItem xs={12} sm={12} md={4}>
-                    <Snackbar
-                      place="br"
-                      color="info"
-                      icon={AddAlert}
-                      message="loading..."
-                      open={this.state.br}
-                      closeNotification={() => this.setState({ br: true })}
-                      close
-                    />
-                  </GridItem>
-                </GridContainer>
-              </GridItem>
-            </GridContainer>
+                }}
+              />
+            </GridItem>
+            <GridItem xs={12} sm={12} md={2} style={{ textAlign: "center" }}>
+              <Button
+                fullWidth
+                color="primary"
+                type="Submit"
+                onClick={() => this.showNotification("bl")}
+              >
+                Add
+              </Button>
+              <Snackbar
+                place="bl"
+                color="info"
+                icon={AddAlert}
+                message="Successfully added."
+                open={this.state.bl}
+                closeNotification={() => this.setState({ bl: false })}
+                close
+              />
+              <Button
+                fullWidth
+                color="danger"
+                type="submit"
+                onClick={() => this.showNotification("tr")}
+                type="reset"
+              >
+                Refresh
+                  </Button>
+              <Snackbar
+                place="tr"
+                color="info"
+                icon={AddAlert}
+                message="Loding. Please wait a few minutes."
+                open={this.state.tr}
+                closeNotification={() => this.setState({ tr: false })}
+                close
+              />
+            </GridItem>
+
+          </GridContainer>
           </form>
         </CardBody>
+
       </Card>
+
     );
   }
 }
-export default withStyles(styles)(Addschool);
+
+export default withStyles(styles)(AddSchool);

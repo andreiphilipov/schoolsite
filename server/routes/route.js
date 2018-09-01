@@ -61,7 +61,7 @@ router.get('/names', (req, res, next) => {
 
 // add schoolname
 router.post('/name', (req, res, next) => {
-
+    console.log(req.body.name);
     let newName = new Name({
         name: req.body.name
     });

@@ -48,7 +48,65 @@ const styles = {
 class Notifications extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      tl: false,
+      tc: false,
+      tr: false,
+      bl: false,
+      bc: false,
+      br: false
+    };
+    this.lertTimeout = null;
+  }
+  componentWillUnmount() {
+    this.clearAlertTimeout();
+  }
+  clearAlertTimeout() {
+    if (this.alertTimeout !== null) {
+      clearTimeout(this.alertTimeout);
     }
+  }
+  showNotification(place) {
+    var x = [];
+    x[place] = true;
+    this.setState(x);
+    this.clearAlertTimeout();
+    this.alertTimeout = setTimeout(
+      function () {
+        x[place] = false;
+        this.setState(x);
+      }.bind(this),
+      1000
+    );
+  }
+
+  handleSubmit() {
+    console.log("afdadsf");
+    var xhr = new XMLHttpRequest();
+    var url = "http://localhost:3000/api/contact";
+    var school_name = document.getElementById('school_name').value
+    var date_year = document.getElementById('date_year').value
+    var date_month = document.getElementById('date_month').value
+    var date_week = document.getElementById('date_week').value
+    var euro_ele = document.getElementById('euro_ele').value
+    var euro_heat = document.getElementById('euro_heat').value
+    var euro_water = document.getElementById('euro_water').value
+    var kwh_heat = document.getElementById('kwh_heat').value
+    var kwh_water = document.getElementById('kwh_water').value
+    var liter_water = document.getElementById('liter_water').value
+
+    console.log(school_name);
+    xhr.open("POST", url, true);
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.onreadystatechange = function () {
+    if (xhr.readyState === 4 && xhr.status === 200) {
+      var json = JSON.parse(xhr.responseText);
+      }
+    };
+    var data = JSON.stringify({"name": name});
+    xhr.send(data);
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -60,10 +118,11 @@ class Notifications extends React.Component {
           </p>
         </CardHeader>
         <CardBody>
+          <form onSubmit={this.handleSubmit}></form>
           <GridContainer>
             <GridItem xs={12} sm={12} md={8}>
               <CustomInput
-                labelText="schoolname"
+                labelText="Schoolname"
                 id="school_name"
                 formControlProps={{
                 fullWidth: true
@@ -74,7 +133,7 @@ class Notifications extends React.Component {
           <GridContainer>
           <GridItem xs={12} sm={12} md={4}>
             <CustomInput
-              labelText="2018"
+              labelText="Year"
               id="date_year"
               formControlProps={{
               fullWidth: true
@@ -83,7 +142,7 @@ class Notifications extends React.Component {
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <CustomInput
-              labelText="month"
+              labelText="Month"
               id="date_month"
               formControlProps={{
               fullWidth: true
@@ -92,7 +151,7 @@ class Notifications extends React.Component {
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
             <CustomInput
-              labelText="week"
+              labelText="Week"
               id="date_week"
               formControlProps={{
               fullWidth: true
@@ -113,7 +172,7 @@ class Notifications extends React.Component {
           <GridItem xs={12} sm={12} md={4}>
             <CustomInput
               labelText="Heating ($)"
-              id="euro_heating"
+              id="euro_heat"
               formControlProps={{
               fullWidth: true
               }}
@@ -157,19 +216,49 @@ class Notifications extends React.Component {
               }}
             />
           </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            
-            />
+          <GridItem xs={12} sm={12} md={6}>
+
           </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-            
-            
-          </GridItem>
-          <GridItem xs={12} sm={12} md={4}>
-          <Button color="primary" round onClick="submit()">
+          <GridItem xs={12} sm={12} md={3}>
+          <Button
+                fullWidth
+                color="primary"
+                type="Submit"
+                onClick={() => this.showNotification("bl")}
+              >
                 Input
-          </Button>         
-          </GridItem>  
+              </Button>
+              <Snackbar
+                place="bl"
+                color="info"
+                icon={AddAlert}
+                message="Successfully added."
+                open={this.state.bl}
+                closeNotification={() => this.setState({ bl: false })}
+                close
+              />
+          </GridItem>
+          <GridItem xs={12} sm={12} md={3}>
+          <Button
+                fullWidth
+                color="primary"
+                type="Reset"
+                onClick={() => this.showNotification("tr")}
+                type="reset"
+              >
+                Reset
+          </Button>
+              <Snackbar
+                place="tr"
+                color="info"
+                icon={AddAlert}
+                message="Loding. Please wait a few minutes."
+                open={this.state.tr}
+                closeNotification={() => this.setState({ tr: false })}
+                close
+              />
+          </GridItem>
+            
           </GridContainer>
         </CardBody>
       </Card>
