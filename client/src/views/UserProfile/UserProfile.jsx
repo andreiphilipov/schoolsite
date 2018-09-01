@@ -13,6 +13,7 @@ import Button from "components/CustomButtons/Button.jsx";
 import Snackbar from "components/Snackbar/Snackbar.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
+import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
 
 const styles = {
@@ -43,8 +44,7 @@ const styles = {
       lineHeight: "1"
     }
   }
-};
-
+}; 
 class InputSchool extends React.Component {
   constructor(props) {
     super(props);
@@ -106,132 +106,152 @@ class InputSchool extends React.Component {
       <div>
         <GridContainer>
           <GridItem xs={12} sm={8} md={8}>
-          <Card>
-        <CardHeader color="primary">
-          <h4 className={classes.cardTitleWhite}>{"SignUp"}</h4>
-          <p className={classes.cardCategoryWhite}>
-            Write down User Information{" "}           
-          </p>
-        </CardHeader>
-        <CardBody>          
-          <form onSubmit={this.controllSubmit}>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={12}>
-              <CustomInput
-                labelText="User Job"
-                id="user_job"
-                formControlProps={{
-                fullWidth: true
-                }}
-              />
-            </GridItem>    
-          </GridContainer>
-          <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
-            <CustomInput
-              labelText="First name"
-              id="first_name"
-              formControlProps={{
-              fullWidth: true
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
-            <CustomInput
-              labelText="Last name"
-              id="last_name"
-              formControlProps={{
-              fullWidth: true
-              }}
-            />
-          </GridItem>                        
-          </GridContainer>
-          <GridContainer>
-          <GridItem xs={12} sm={12} md={6}>
-            <CustomInput
-              labelText="User name"
-              id="u_name"
-              formControlProps={{
-              fullWidth: true
-            }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
-            <CustomInput
-              labelText="E-mail"
-              id="e_mail"
-              formControlProps={{
-              fullWidth: true
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
-            <CustomInput
-              labelText="Password"
-              id="u_pass"
-              formControlProps={{
-              fullWidth: true
-              }}
-            />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={6}>
-            <CustomInput
-              labelText="Verify Password"
-              id="v_pass"
-              formControlProps={{
-              fullWidth: true
-              }}
-            />
-            </GridItem>         
-          </GridContainer>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={8}>
-              <CustomInput
-                labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
-                id="about_user"
-                formControlProps={{
-                fullWidth: true
-                }}
-                inputProps={{
-                multiline: true,
-                rows: 5
-                }}
-              />
-            </GridItem>
-            <GridItem xs={12} sm={12} md={4}>
-              
-            </GridItem>
-          </GridContainer>
-          <GridContainer>
-            <GridItem xs={12} sm={12} md={6}>
-            
-            </GridItem>
-            <GridItem xs={12} sm={12} md={3}>
-            <Button
-              fullWidth
-              color="primary"
-              type="Submit"
-            >
-              Register
-            </Button>
-            </GridItem>
-            <GridItem xs={12} sm={12} md={3}>
-            <Button
-              fullWidth
-              color="primary"
-              type="Reset"                
-            >
-              Reset
-            </Button>              
-            </GridItem>            
-          </GridContainer>
-          </form>
-        </CardBody>
-      </Card>
+            <Card>
+              <CardHeader color="primary">
+                <h4 className={classes.cardTitleWhite}>{"SignUp"}</h4>
+                <p className={classes.cardCategoryWhite}>
+                  Write down User Information{" "}           
+                </p>
+              </CardHeader>
+              <CardBody>          
+                <form onSubmit={this.controllSubmit}>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={12}>
+                    <CustomInput
+                      labelText="User Job"
+                      id="user_job"
+                      formControlProps={{
+                      fullWidth: true
+                      }}
+                    />
+                  </GridItem>    
+                </GridContainer>
+                <GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="First name"
+                    id="first_name"
+                    formControlProps={{
+                    fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Last name"
+                    id="last_name"
+                    formControlProps={{
+                    fullWidth: true
+                    }}
+                  />
+                </GridItem>                        
+                </GridContainer>
+                <GridContainer>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="User name"
+                    id="u_name"
+                    formControlProps={{
+                    fullWidth: true
+                  }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="E-mail"
+                    id="e_mail"
+                    formControlProps={{
+                    fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Password"
+                    id="u_pass"
+                    formControlProps={{
+                    fullWidth: true
+                    }}
+                  />
+                </GridItem>
+                <GridItem xs={12} sm={12} md={6}>
+                  <CustomInput
+                    labelText="Verify Password"
+                    id="v_pass"
+                    formControlProps={{
+                    fullWidth: true
+                    }}
+                  />
+                  </GridItem>         
+                </GridContainer>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={8}>
+                    <CustomInput
+                      labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
+                      id="about_user"
+                      formControlProps={{
+                      fullWidth: true
+                      }}
+                      inputProps={{
+                      multiline: true,
+                      rows: 5
+                      }}
+                    />
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                    
+                  </GridItem>
+                </GridContainer>
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={6}>
+                  
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={3}>
+                  <Button
+                    fullWidth
+                    color="primary"
+                    type="Submit"
+                  >
+                    Register
+                  </Button>
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={3}>
+                  <Button
+                    fullWidth
+                    color="primary"
+                    type="Reset"                
+                  >
+                    Reset
+                  </Button>              
+                  </GridItem>
+                  <GridItem xs={12} sm={12} md={4}>
+                  <Card profile>
+                    <CardAvatar profile>
+                      <a href="#pablo" onClick={e => e.preventDefault()}>
+                        {/* <img src={avatar} alt="..." /> */}
+                      </a>
+                    </CardAvatar>
+                    <CardBody profile>
+                      <h6 className={classes.cardCategory}>CEO / CO-FOUNDER</h6>
+                      <h4 className={classes.cardTitle}>Alec Thompson</h4>
+                      <p className={classes.description}>
+                        Do not be scared of the truth because we need to restart the
+                        human foundation in truth And I love you like Kanye loves Kanye
+                        I love Rick Owens’ bed design but the back is...
+                      </p>
+                        <Button color="primary" round>
+                          Follow
+                        </Button>
+                      </CardBody>
+                    </Card>
+                  </GridItem>            
+                  </GridContainer>
+                </form>
+              </CardBody>
+            </Card>
           </GridItem>
         </GridContainer>
-      </div>
-      
+      </div>      
     );
   }
 }
