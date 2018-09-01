@@ -45,7 +45,7 @@ const styles = {
   }
 };
 
-class Notifications extends React.Component {
+class InputSchool extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -80,8 +80,8 @@ class Notifications extends React.Component {
     );
   }
 
-  handleSubmit() {
-    console.log("afdadsf");
+  controllSubmit() {
+
     var xhr = new XMLHttpRequest();
     var url = "http://localhost:3000/api/contact";
     var school_name = document.getElementById('school_name').value
@@ -95,7 +95,6 @@ class Notifications extends React.Component {
     var kwh_water = document.getElementById('kwh_water').value
     var liter_water = document.getElementById('liter_water').value
 
-    console.log(school_name);
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function () {
@@ -103,7 +102,7 @@ class Notifications extends React.Component {
       var json = JSON.parse(xhr.responseText);
       }
     };
-    var data = JSON.stringify({"name": name});
+    var data = JSON.stringify({"school_name": school_name, "date_year":date_year, "date_month":date_month, "date_week":date_week, "euro_ele":euro_ele, "euro_heat":euro_heat, "euro_water":euro_water, "kwh_heat":kwh_heat, "kwh_water":kwh_water, "liter_water":liter_water});
     xhr.send(data);
   }
 
@@ -118,7 +117,7 @@ class Notifications extends React.Component {
           </p>
         </CardHeader>
         <CardBody>
-          <form onSubmit={this.handleSubmit}></form>
+          <form onSubmit={this.controllSubmit}>
           <GridContainer>
             <GridItem xs={12} sm={12} md={8}>
               <CustomInput
@@ -257,13 +256,13 @@ class Notifications extends React.Component {
                 closeNotification={() => this.setState({ tr: false })}
                 close
               />
-          </GridItem>
-            
+          </GridItem>            
           </GridContainer>
+          </form>
         </CardBody>
       </Card>
     );
   }
 }
 
-export default withStyles(styles)(Notifications);
+export default withStyles(styles)(InputSchool);

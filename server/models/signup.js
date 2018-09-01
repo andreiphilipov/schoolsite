@@ -2,15 +2,7 @@ const mongoose = require('mongoose');
 
 const SignupSchema = mongoose.Schema({
    
-    com_name:{
-        type: String,
-        require: true
-    },
-    user_name:{
-        type: String,
-        require: true
-    },  
-    e_mail:{
+    user_job:{
         type: String,
         require: true
     },
@@ -22,19 +14,19 @@ const SignupSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    address_name:{
+    u_name:{
         type: String,
         require: true
     },
-    user_city:{
+    e_mail:{
         type: String,
         require: true
     },
-    user_country:{
+    u_pass:{
         type: String,
         require: true
     },
-    postal_code:{
+    v_pass:{
         type: String,
         require: true
     },

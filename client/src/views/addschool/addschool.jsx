@@ -87,7 +87,8 @@ class AddSchool extends React.Component {
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function () {
     if (xhr.readyState === 4 && xhr.status === 200) {
-      }
+      var json = JSON.parse(xhr.responseText);  
+    }
     };
     var data = JSON.stringify({"name": name});
     xhr.send(data);

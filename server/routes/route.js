@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 
-const Contact = require('../models/contacts');
+const Contact = require('../models/contact');
 const Name = require('../models/name');
 const Signup = require('../models/signup');
 
@@ -15,6 +15,7 @@ router.get('/contacts', (req, res, next) => {
 
 //add contact
 router.post('/contact', (req, res, next) => {
+    console.log(req.body.school_name);
     let newContact = new Contact({
         school_name: req.body.school_name,
         date_year: req.body.date_year,
@@ -27,6 +28,7 @@ router.post('/contact', (req, res, next) => {
         kwh_water: req.body.kwh_water,
         liter_water: req.body.liter_water
     });
+    
 
     newContact.save((err, contact) => {
         if (err) {
@@ -61,7 +63,7 @@ router.get('/names', (req, res, next) => {
 
 // add schoolname
 router.post('/name', (req, res, next) => {
-    console.log(req.body.name);
+
     let newName = new Name({
         name: req.body.name
     });
@@ -87,19 +89,16 @@ router.get('/signups', (req, res, next) => {
 
 //Signup
 router.post('/signup', (req, res, next) => {
-
+    console.log(req.body)
     let newSignup = new Signup({       
-        com_name: req.body.com_name,
-        user_name:req.body.user_name,  
-        e_mail:req.body.e_mail,
+        user_job:req.body.user_job,
         first_name:req.body.first_name,
         last_name:req.body.last_name,
-        address_name:req.body.address_name,
-        user_city:req.body.user_city,
-        user_country:req.body.user_country,
-        postal_code:req.body.postal_code,
+        u_name:req.body.u_pass,
+        e_mail:req.body.e_mail,
+        u_pass:req.body.u_pass,
+        v_pass:req.body.v_pass,
         about_user:req.body.about_user
-
     })
 
     newSignup.save((err, Signup) => {
