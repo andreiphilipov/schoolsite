@@ -9,7 +9,6 @@ import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-// import SnackbarContent from "components/Snackbar/SnackbarContent.jsx";
 import Snackbar from "components/Snackbar/Snackbar.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
@@ -50,17 +49,12 @@ class Addschool extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tl: false,
-      tc: false,
-      tr: false,
-      bl: false,
-      bc: false,
-      br: false
-    };
+
+     };
     this.lertTimeout = null;
   }
   add_name(){
-    console.log('add_school');
+    fetch()
   }
   componentWillUnmount() {
     this.clearAlertTimeout();
@@ -98,11 +92,11 @@ class Addschool extends React.Component {
             <GridContainer>
               <GridItem xs={12} sm={12} md={9}>
                 <CustomInput
-                  labelText="Add school Name"
-                  id="add_school"
+                  labelText="Add school Name"                  
                   formControlProps={{
                   fullWidth: true
-                  }}
+                  }}                  
+                  {props.messages.length && <MessageList messages={props.messages} /> }
                 />
               </GridItem>
               <GridItem xs={12} sm={12} md={3}>
@@ -110,7 +104,9 @@ class Addschool extends React.Component {
                 <Button
                   fullWidth
                   color="primary"
-                  onClick={this.add_name.bind(this)}
+                  id="add_school"
+                  name="add_school"
+                  onClick={this.add_name.bind(this.add_school)}
                 >
                   Add
                 </Button>

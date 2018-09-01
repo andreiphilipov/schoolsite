@@ -166,7 +166,7 @@ class Notifications extends React.Component {
             
           </GridItem>
           <GridItem xs={12} sm={12} md={4}>
-          <Button color="primary" round onclick="submit()">
+          <Button color="primary" round onClick="submit()">
                 Input
           </Button>         
           </GridItem>  
