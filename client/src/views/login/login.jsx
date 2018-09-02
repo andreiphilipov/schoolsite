@@ -9,7 +9,6 @@ import GridItem from "components/Grid/GridItem.jsx";
 import GridContainer from "components/Grid/GridContainer.jsx";
 import CustomInput from "components/CustomInput/CustomInput.jsx";
 import Button from "components/CustomButtons/Button.jsx";
-// import SnackbarContent from "components/Snackbar/SnackbarContent.jsx";
 import Snackbar from "components/Snackbar/Snackbar.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
@@ -29,22 +28,27 @@ class Login extends React.Component {
     }
     componentDidmount(){
         this.refs.name.focus();
-    }
-    fSubmt = (e) => {
-        e.preventDefault();
-        console.log('try');
-
-        let datas = this.state.datas;
-        let name = this.refs.name.value;
-        let address = this.refs.address.value;
-
-        let data = {
-            name, address
-        }
-    }
+    } 
+    controllSubmit() {
+        var xhr = new XMLHttpRequest();
+        var url = "http://localhost:3000/api/login";
+        var user_name = document.getElementById('user_name').value
+        var user_pass = document.getElementById('user_pass').value
+    
+        xhr.open("POST", url, true);
+        xhr.setRequestHeader("Content-Type", "application/json");
+        xhr.onreadystatechange = function () {
+        if (xhr.readyState === 4 && xhr.status === 200) {
+          var json = JSON.parse(xhr.responseText);
+          }
+        };
+        var data = JSON.stringify({"user_name": user_name, "user_pass": user_pass});
+        xhr.send(data);
+      }
     render() {
         const { classes } = this.props;
         return (
+            <GridItem xs={12} sm={12} md={6}>
             <Card>
                 <CardHeader color="primary">
                     <h4 className={classes.cardTitleWhite}>{"Login"}</h4>
@@ -55,16 +59,16 @@ class Login extends React.Component {
                 <CardBody>
                     <form>
                         <GridContainer>
-                            <GridItem xs={12} sm={12} md={6}>
+                            <GridItem xs={12} sm={12} md={12}>
                                 <CustomInput
-                                    labelText="User name"
+                                    labelText="Username"
                                     id="user_name"
                                     formControlProps={{
                                         fullWidth: true
                                     }}
                                 />
                             </GridItem>
-                            <GridItem xs={12} sm={12} md={6}>
+                            <GridItem xs={12} sm={12} md={12}>
                                 <CustomInput
                                     labelText="Password"
                                     id="user_pass"
@@ -89,7 +93,7 @@ class Login extends React.Component {
                                 <Button
                                     fullWidth
                                     color="danger"
-                                    onClick={""}
+                                    onClick={this.controllSubmit}
                                 >
                                     Signup
                                 </Button>
@@ -114,6 +118,7 @@ class Login extends React.Component {
                     </form>
                 </CardBody>
             </Card>
+            </GridItem>
         );
     }
 }

@@ -10,6 +10,8 @@ import TableList from "views/TableList/TableList.jsx";
 import addschool from "views/addschool/addschool.jsx";
 import inputschoolPage from "views/inputschool/inputschool.jsx";
 import login from "views/login/login.jsx";
+import signup  from "views/signup/signup.jsx";
+
 
 const dashboardRoutes = [
   {
@@ -53,7 +55,14 @@ const dashboardRoutes = [
     navbarName: "Login",
     icon: Person,
     component: login
-  },
+  }, 
+  {
+    path: "/signup",
+    sidebarName: "Signup",
+    navbarName: "Signup",
+    icon: Person,
+    component: signup
+  }, 
 
   { redirect: true, path: "/", to: "/dashboard", navbarName: "Redirect" }
 ];
