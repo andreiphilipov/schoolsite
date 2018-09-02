@@ -1,18 +1,12 @@
 import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
-// @material-ui/icons
-import AddAlert from "@material-ui/icons/AddAlert";
+
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
-import CustomInput from "components/CustomInput/CustomInput.jsx";
-import GridContainer from "components/Grid/GridContainer.jsx";
-import Table from "components/Table/Table.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
 import CardBody from "components/Card/CardBody.jsx";
-import Button from "components/CustomButtons/Button.jsx";
-import Snackbar from "components/Snackbar/Snackbar.jsx";
 
 const styles = {
   cardCategoryWhite: {
@@ -47,64 +41,96 @@ const styles = {
 class TableList extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
-    this.lertTimeout = null;
+    this.state = {
+      data: []
+    };
   }
-  componentWillUnmount() {
-    this.clearAlertTimeout();
-  }
-  clearAlertTimeout() {
-    if (this.alertTimeout !== null) {
-      clearTimeout(this.alertTimeout);
+  componentDidMount() {
+    fetch('http://localhost:3000/api/contacts')
+      .then(res => res.json())
+      .then(res => {
+        let data = res;
+        this.setState({ data })
+      });
+  }    
+    render() 
+    {
+      const { classes } = this.props;
+      const api = this.state.data.map((item, key)=>{
+        return
+       <tr key={key}>
+          <td>{key+1}</td>
+          <td>{item.school_name}</td>
+          <td>{item.date_year}</td>
+          <td>{item.date_month}</td>
+          <td>{item.date_week}</td>
+          <td>{item.euro_ele}</td>
+          <td>{item.euro_heat}</td>
+          <td>{item.euro_water}</td>
+          <td>{item.kwh_heat}</td>
+          <td>{item.kwh_water}</td>
+          <td>{item.liter_water}</td>
+        </tr>
+      })
+      
+      return (
+        <Card>
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>Static Table</h4>
+            <p className={classes.cardCategoryWhite}>
+              It shows every school's supplyment and lock.{" "}
+            </p>
+          </CardHeader>
+          <CardBody>
+            <GridItem xs={12} sm={12} md={12}>
+              <Card>
+                <CardHeader color="danger">
+                  <h4 className={classes.cardTitleWhite}>Supplyment</h4>
+                </CardHeader>
+                <CardBody>
+                  <div>                
+                  <table>
+                    <thead>
+                      <th>No</th>
+                      <th>Schoolname</th>
+                      <th>Year</th>
+                      <th>Month</th>
+                      <th>Week</th>
+                      <th>Electricity($)</th>
+                      <th>Heat($)</th>
+                      <th>Water($)</th>
+                      <th>Heat(kwh)</th>
+                      <th>Water(kwh)</th>
+                      <th>Water(L)</th>
+                      <th>Action</th>
+                    </thead>
+                    <tbody>
+                      {this.state.data.map((item, i) =>(
+                        <tr>
+                          <td>{i+1}</td>
+                          <td>{item.school_name}</td>
+                          <td>{item.date_year}</td>
+                          <td>{item.date_month}</td>
+                          <td>{item.date_week}</td>
+                          <td>{item.euro_ele}</td>
+                          <td>{item.euro_heat}</td>
+                          <td>{item.euro_water}</td>
+                          <td>{item.kwh_heat}</td>
+                          <td>{item.kwh_water}</td>
+                          <td>{item.liter_water}</td>
+                          <td></td>
+                        </tr>                        
+                      ))}                      
+                    </tbody>
+                  </table>
+                  </div>
+                </CardBody>
+              </Card>
+            </GridItem>
+          </CardBody>
+        </Card>
+      );
     }
   }
-  showNotification(place) {
-    var x = [];
-    x[place] = true;
-    this.setState(x);
-    this.clearAlertTimeout();
-    this.alertTimeout = setTimeout(
-      function () {
-        x[place] = false;
-        this.setState(x);
-      }.bind(this),
-      1000
-    );
-  }
 
-  render() {
-    const { classes } = this.props;
-    return (
-      <Card>
-        <CardHeader color="primary">
-          <h4 className={classes.cardTitleWhite}>Static Table</h4>
-          <p className={classes.cardCategoryWhite}>
-            It shows every school's supplyment and lock.{" "}
-          </p>
-        </CardHeader>
-        <CardBody>
-          <GridItem xs={12} sm={12} md={12}>
-            <Card>
-              <CardHeader color="danger">
-                <h4 className={classes.cardTitleWhite}>Supplyment</h4>
-              </CardHeader>
-              <CardBody>
-                <Table
-                  tableHeaderColor="danger"
-                  tableHead={["Schoolname", "Year", "Month", "Week", "Electricity($)", "Heat($)", "Water($)", "Heat(kwh)", "Water(kwh)", "Water(L)"]}
-                  tableData={[
-                    ["Dakota Rice", "12", "78", "25", "34", "77", "17", "22", "77", "66"]                    
-                  ]}
-                />
-              </CardBody>
-            </Card>
-          </GridItem>
-        </CardBody>
-
-      </Card>
-
-    );
-  }
-}
-
-export default withStyles(styles)(TableList);
+  export default withStyles(styles)(TableList);
