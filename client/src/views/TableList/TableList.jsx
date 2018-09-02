@@ -87,62 +87,13 @@ class TableList extends React.Component {
                 <CardBody> 
                 <Table
                   tableHeaderColor="warning"
-                  tableHead={["Schoolname", "Year", "Month", "Week", "Electricity()$","Hear($)","Water($)","Heat(kwh)","Water(kwh)","Water(L)"]}
+                  tableHead={["Schoolname", "Year", "Month", "Week", "Electricity()$", "Hear($)", "Water($)", "Heat(kwh)", "Water(kwh)", "Water(L)"]}
                   tableData={this.state.data.map((item)=>(
-                    [item.school_name,item.date_year,item.date_month,item.date_week,item.euro_ele,item.euro_heat,item.euro_water,item.kwh_heat,item.kwh_water,item.liter_water]
+                    [item.school_name, item.date_year, item.date_month, item.date_week, item.euro_ele, item.euro_heat, 
+                      item.euro_water, item.kwh_heat, item.kwh_water, item.liter_water]
                   )
                 )}
-                />                        
-                  {/* <table>
-                    <thead>
-                      <th>No</th>
-                      <th>Schoolname</th>
-                      <th>Year</th>
-                      <th>Month</th>
-                      <th>Week</th>
-                      <th>Electricity($)</th>
-                      <th>Heat($)</th>
-                      <th>Water($)</th>
-                      <th>Heat(kwh)</th>
-                      <th>Water(kwh)</th>
-                      <th>Water(L)</th>
-                      <th>edit</th>
-                      <th>remove</th>
-                    </thead>
-                    <tbody> 
-                      {this.state.data.map((item, i) =>(
-                        <tr>
-                          <td>{i+1}</td>
-                          <td>{item.school_name}</td>
-                          <td>{item.date_year}</td>
-                          <td>{item.date_month}</td>
-                          <td>{item.date_week}</td>
-                          <td>{item.euro_ele}</td>
-                          <td>{item.euro_heat}</td>
-                          <td>{item.euro_water}</td>
-                          <td>{item.kwh_heat}</td>
-                          <td>{item.kwh_water}</td>
-                          <td>{item.liter_water}</td>
-                          <td>
-                          <Button                            
-                            color="primary"
-                            onClick={() => this.onEdit.bind(item.id)}
-                          >
-                            EDIT
-                          </Button>
-                          </td>
-                          <td>
-                          <Button                            
-                            color="danger"
-                            onClick={() => this.onDelete.bind(item._id)}
-                          >
-                            DELETE
-                          </Button>
-                          </td>
-                        </tr>                        
-                      ))}                      
-                    </tbody>
-                  </table>                                  */}
+                />
                 </CardBody>
               </Card>
             </GridItem>
