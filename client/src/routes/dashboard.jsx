@@ -9,9 +9,6 @@ import UserProfile from "views/UserProfile/UserProfile.jsx";
 import TableList from "views/TableList/TableList.jsx";
 import addschool from "views/addschool/addschool.jsx";
 import inputschoolPage from "views/inputschool/inputschool.jsx";
-import login from "views/login/login.jsx";
-import signup  from "views/signup/signup.jsx";
-
 
 const dashboardRoutes = [
   {
@@ -48,23 +45,9 @@ const dashboardRoutes = [
     navbarName: "Input Data",
     icon: LibraryBooks,
     component: inputschoolPage
-  },
-  {
-    path: "/login",
-    sidebarName: "Login",
-    navbarName: "Login",
-    icon: Person,
-    component: login
-  }, 
-  {
-    path: "/signup",
-    sidebarName: "Signup",
-    navbarName: "Signup",
-    icon: Person,
-    component: signup
-  }, 
+  },  
 
-  { redirect: true, path: "/", to: "/login", navbarName: "Redirect" }
+  { redirect: true, path: "/dashboard", to: "/dashboard", navbarName: "Redirect" }
 ];
 
 export default dashboardRoutes;
