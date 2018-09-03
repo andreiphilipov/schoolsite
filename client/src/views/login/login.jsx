@@ -26,26 +26,10 @@ class Login extends React.Component {
             datas:[]
         };
     }
-    componentDidmount(){
-        this.refs.name.focus();
-    } 
-    controllSubmit() {
-        var xhr = new XMLHttpRequest();
-        var url = "http://localhost:3000/api/login";
-        var user_name = document.getElementById('user_name').value
-        var user_pass = document.getElementById('user_pass').value
     
-        xhr.open("POST", url, true);
-        xhr.setRequestHeader("Content-Type", "application/json");
-        xhr.onreadystatechange = function () {
-        if (xhr.readyState === 4 && xhr.status === 200) {
-          var json = JSON.parse(xhr.responseText);
-          }
-        };
-        var data = JSON.stringify({"user_name": user_name, "user_pass": user_pass});
-        xhr.send(data);
-      }
-    render() {
+}
+    render() 
+    {
         const { classes } = this.props;
         return (
             <GridItem xs={12} sm={12} md={6}>
@@ -121,5 +105,5 @@ class Login extends React.Component {
             </GridItem>
         );
     }
-}
+
 export default withStyles(dashboardStyle)(Login);
