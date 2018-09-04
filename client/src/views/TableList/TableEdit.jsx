@@ -44,22 +44,26 @@ const styles = {
   }
 };
 
-class InputSchool extends React.Component {
+class TableEdit extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      tl: false,
-      tc: false,
-      tr: false,
-      bl: false,
-      bc: false,
-      br: false
-    };
-    this.lertTimeout = null;
+      data: []
+    };    
   }
   componentWillUnmount() {
-    this.clearAlertTimeout();
+    this.loadUserDataById();
   }
+
+  loadUserDataById() {
+    fetch('http://localhost:3000/contact/' + this.props.match.params.id, this.requestOptions)
+      .then(response => response.json())
+      .then(response => {
+        this.setState({ data: response.data })
+      })
+      console.log(this.state.data);
+    }
+
   clearAlertTimeout() {
     if (this.alertTimeout !== null) {
       clearTimeout(this.alertTimeout);
@@ -77,9 +81,7 @@ class InputSchool extends React.Component {
       }.bind(this),
       1000
     );
-  }
-
-  
+  }  
 
   controllSubmit() {
 
@@ -112,9 +114,9 @@ class InputSchool extends React.Component {
     return (
       <Card>
         <CardHeader color="primary">
-          <h4 className={classes.cardTitleWhite}>{"Input School Data"}</h4>
+          <h4 className={classes.cardTitleWhite}>{"Modify School Data"}</h4>
           <p className={classes.cardCategoryWhite}>
-            Input here School static data{" "}           
+            Change school data on here{" "}           
           </p>
         </CardHeader>
         <CardBody>
@@ -232,32 +234,12 @@ class InputSchool extends React.Component {
                 place="bl"
                 color="info"
                 icon={AddAlert}
-                message="Successfully added."
+                message="Successfully changed."
                 open={this.state.bl}
                 closeNotification={() => this.setState({ bl: false })}
                 close
               />
-          </GridItem>
-          <GridItem xs={12} sm={12} md={3}>
-          <Button
-                fullWidth
-                color="primary"
-                type="Reset"
-                onClick={() => this.showNotification("tr")}
-                type="reset"
-              >
-                Reset
-          </Button>
-              <Snackbar
-                place="tr"
-                color="info"
-                icon={AddAlert}
-                message="Loding. Please wait a few minutes."
-                open={this.state.tr}
-                closeNotification={() => this.setState({ tr: false })}
-                close
-              />
-          </GridItem>            
+          </GridItem>                     
           </GridContainer>
           </form>
         </CardBody>
@@ -266,4 +248,4 @@ class InputSchool extends React.Component {
   }
 }
 
-export default withStyles(styles)(InputSchool);
+export default withStyles(styles)(TableEdit);

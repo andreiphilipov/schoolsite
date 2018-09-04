@@ -1,14 +1,16 @@
-/* eslint-disable */
 import React from "react";
 // @material-ui/core components
 import withStyles from "@material-ui/core/styles/withStyles";
 // core components
 import GridItem from "components/Grid/GridItem.jsx";
-import GridContainer from "components/Grid/GridContainer.jsx";
 import Card from "components/Card/Card.jsx";
 import CardHeader from "components/Card/CardHeader.jsx";
-import CardAvatar from "components/Card/CardAvatar.jsx";
 import CardBody from "components/Card/CardBody.jsx";
+import Table from "components/Table/Table.jsx";
+import Edit from "@material-ui/icons/Edit";
+import Close from "@material-ui/icons/Close";
+import IconButton from "@material-ui/core/IconButton";
+import { Link } from "react-router-dom";
 
 const styles = {
   cardCategoryWhite: {
@@ -38,35 +40,14 @@ const styles = {
       lineHeight: "1"
     }
   }
-}; 
-class InputSchool extends React.Component {
+};
+
+class TableList extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data:[]
+      data: []
     };
-    this.lertTimeout = null;
-  }
-  componentWillUnmount() {
-    this.clearAlertTimeout();
-  }
-  clearAlertTimeout() {
-    if (this.alertTimeout !== null) {
-      clearTimeout(this.alertTimeout);
-    }
-  }
-  showNotification(place) {
-    var x = [];
-    x[place] = true;
-    this.setState(x);
-    this.clearAlertTimeout();
-    this.alertTimeout = setTimeout(
-      function () {
-        x[place] = false;
-        this.setState(x);
-      }.bind(this),
-      1000
-    );
   }
   componentDidMount() {
     fetch('http://localhost:3000/api/signups')
@@ -75,54 +56,84 @@ class InputSchool extends React.Component {
         let data = res;
         this.setState({ data })
       });
-  } 
-  
-  render() {
-    const { classes } = this.props;
-    return (
-      <div>
-        <GridItem xs={12} sm={12} md={12}>
-      <Card>
-        <CardHeader color="primary">
-        <h4 className={classes.cardTitleWhite}>{"SignUp"}</h4>
-        <p className={classes.cardCategoryWhite}>
-            Here are our site users{" "}           
-        </p>
-        </CardHeader>
-        <CardBody> 
-        <GridContainer>
-        {this.state.data.map((item, i) =>(
-          <GridItem xs={12} sm={12} md={3}>
-          if ({item.img == ""}) {
-            item.img = "no photo"
-          }
-          <Card profile>
-            <CardAvatar profile>
-              <a href="#pablo" onClick={e => e.preventDefault()}>
-                <img src="{item.img}" alt="..." />
-              </a>
-            </CardAvatar>
-            <CardBody profile>
-              <h6 className={classes.cardCategory}>{item.user_job}</h6>
-              <h4 className={classes.cardTitle}>{item.first_name}{item.last_name}</h4>
-              <p className={classes.description}>
-                {item.about_user}
-              </p>
+      console.log(this.state.data);
+  }    
+  onDelete(id) {
+    console.log(id)
+    const requestOptions = {
+      method: 'delete',
+      headers: { 'Content-Type': 'application/json' },
+    };
+    return fetch('http://127.0.0.1:3000/api/signup/' + id, requestOptions)
+      .then(response => {
+        alert("successfully deleted")
+        this.props.history.push("/user");
+      }
+    )
+  };
 
-              {/* <Button color="primary" round>
-                Follow
-              </Button> */}
-            </CardBody>
-            </Card>
-          </GridItem>
-        ))}
-        </GridContainer>
-        </CardBody>
+  render() 
+    {
+      const { classes } = this.props;
+      return (
+        <Card>
+          <CardHeader color="primary">
+            <h4 className={classes.cardTitleWhite}>User Table</h4>
+            <p className={classes.cardCategoryWhite}>
+              It shows all of the user's information.{" "}
+            </p>
+          </CardHeader>
+          <CardBody>
+            <GridItem xs={12} sm={12} md={12}>
+              <Card>                
+                <CardBody> 
+                <Table
+                  tableHeaderColor="warning"
+                  tableHead={[
+                    "No",
+                    "Company",
+                    "Username",
+                    "Email-address",
+                    "First name",
+                    "Last name",
+                    "Password",
+                    "Credit Card",
+                    "Edit",   
+                    "Remove"                 
+                    ]}
+                  tableData={this.state.data.map((item,i)=>(
+                  [
+                    i+1,
+                    item.com_name,
+                    item.user_name,
+                    item.email_address,
+                    item.first_name,
+                    item.last_name,
+                    item.user_pwd,
+                    item.card_num,                    
+                    <IconButton
+                      className={classes.tableActionButton}
+                    >  
+                    <Link to={`/edit/${item._id}`}><Edit className={classes.tableActionButtonIcon + " " + classes.edit}/></Link>                                                
+                    </IconButton>
+                    ,                     
+                    <IconButton
+                      className={classes.tableActionButton}
+                    >
+                      <Close className={classes.tableActionButtonIcon + " " + classes.close} onClick = {this.onDelete.bind(this, item._id)}
+                      />
+                    </IconButton>
+                    ]
+                  )
+                )}
+                />
+                </CardBody>
+              </Card>
+            </GridItem>
+          </CardBody>
         </Card>
-        </GridItem>
-      </div>      
-    );
+      );
+    }
   }
-}
 
-export default withStyles(styles)(InputSchool);
+  export default withStyles(styles)(TableList);

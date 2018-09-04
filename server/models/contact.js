@@ -5,39 +5,39 @@ const ContactSchema = mongoose.Schema({
         required:true
     },
     date_year:{
-         type:Number,
+         type:String,
          required:true
     },
     date_month:{
-        type:Number,
+        type:String,
         required:true
     },
     date_week:{
-        type:Number,
+        type:String,
        required:true
     },    
     euro_ele:{
-        type:Number,
+        type:String,
         required:true
     },
     euro_heat:{
-        type:Number,
+        type:String,
         required:true
     },
     euro_water:{
-        type:Number,
+        type:String,
         required:true
     },
     kwh_heat:{
-        type:Number,
+        type:String,
         required:true
     },
     kwh_water:{
-        type:Number,
+        type:String,
         required:true
     },
     liter_water:{
-        type:Number,
+        type:String,
         required:true
     }
 })

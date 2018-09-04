@@ -82,8 +82,8 @@ router.post('/name', (req, res, next) => {
 
 //retrieving data
 router.get('/signups', (req, res, next) => {
-    Signup.find(function (err, signups) {
-        res.json(signups);
+    Signup.find(function (err, Signups) {
+        res.json(Signups);
     })
 });
 
@@ -91,14 +91,15 @@ router.get('/signups', (req, res, next) => {
 router.post('/signup', (req, res, next) => {
     console.log(req.body)
     let newSignup = new Signup({       
-        user_job:req.body.user_job,
+        com_name:req.body.com_name,
+        user_name:req.body.user_name,
+        email_address:req.body.email_address,
         first_name:req.body.first_name,
         last_name:req.body.last_name,
-        u_name:req.body.u_pass,
-        e_mail:req.body.e_mail,
-        u_pass:req.body.u_pass,
-        v_pass:req.body.v_pass,
-        about_user:req.body.about_user
+        user_pwd:req.body.user_pwd,
+        user_p_pwd:req.body.user_p_pwd,
+        card_num:req.body.card_num,
+        about_me:req.body.about_me
     })
 
     newSignup.save((err, Signup) => {
@@ -111,8 +112,8 @@ router.post('/signup', (req, res, next) => {
     });
 });
 
-router.delete('/signup/:id', (req, res, next) => {
-    User.remove({ _id: req.params.id }, function (err, result) {
+router.delete('/signups/:id', (req, res, next) => {
+    Signups.remove({ _id: req.params.id }, function (err, result) {
         if (err) {
             res.json(err);
         }

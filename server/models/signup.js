@@ -2,7 +2,15 @@ const mongoose = require('mongoose');
 
 const SignupSchema = mongoose.Schema({
    
-    user_job:{
+    com_name:{
+        type: String,
+        require: true
+    },
+    user_name:{
+        type: String,
+        require: true
+    },
+    email_address:{
         type: String,
         require: true
     },
@@ -14,23 +22,19 @@ const SignupSchema = mongoose.Schema({
         type: String,
         require: true
     },
-    u_name:{
+    user_pwd:{
         type: String,
         require: true
     },
-    e_mail:{
+    user_p_pwd:{
         type: String,
         require: true
     },
-    u_pass:{
+    card_num:{
         type: String,
         require: true
     },
-    v_pass:{
-        type: String,
-        require: true
-    },
-    about_user:{
+    about_me:{
         type: String,
         require: true
     }
