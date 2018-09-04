@@ -89,31 +89,33 @@ router.get('/signups', (req, res, next) => {
 
 //Signup
 router.post('/signup', (req, res, next) => {
-    console.log(req.body)
-    let newSignup = new Signup({       
-        com_name:req.body.com_name,
-        user_name:req.body.user_name,
-        email_address:req.body.email_address,
-        first_name:req.body.first_name,
-        last_name:req.body.last_name,
-        user_pwd:req.body.user_pwd,
-        user_p_pwd:req.body.user_p_pwd,
-        card_num:req.body.card_num,
-        about_me:req.body.about_me
-    })
+    console.log(req.body.com_name);
+    let newSignup = new Signup({
+        com_name: req.body.com_name,
+        user_name: req.body.user_name,
+        email_address: req.body.email_address,
+        first_name: req.body.first_name,
+        last_name: req.body.last_name,
+        user_pwd: req.body.user_pwd,
+        user_p_pwd: req.body.user_p_pwd,
+        card_num: req.body.card_num,
+        about_me: req.body.about_me
+    });
+    
 
-    newSignup.save((err, Signup) => {
-
+    newContact.save((err, signup) => {
         if (err) {
-            res.json({ msg: 'Failed to signup' });
-        } else {
-            res.json({ msg: 'signed successfully up' });
+            res.json({ msg: 'Sorry. signup failed' });
+        }
+        else {
+            res.json({ msg: 'Success. Congratulations.' });
         }
     });
 });
-//delete
-router.delete('/signups/:id', (req, res, next) => {
-    Signup.remove({ _id: req.params.id }, function (err, result) {
+
+//delete contact
+router.delete('/signup/:id', (req, res, next) => {
+    Contact.remove({ _id: req.params.id }, function (err, result) {
         if (err) {
             res.json(err);
         }
