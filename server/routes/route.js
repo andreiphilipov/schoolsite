@@ -111,9 +111,9 @@ router.post('/signup', (req, res, next) => {
         }
     });
 });
-
+//delete
 router.delete('/signups/:id', (req, res, next) => {
-    Signups.remove({ _id: req.params.id }, function (err, result) {
+    Signup.remove({ _id: req.params.id }, function (err, result) {
         if (err) {
             res.json(err);
         }

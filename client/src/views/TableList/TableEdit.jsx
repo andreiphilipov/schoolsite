@@ -51,7 +51,7 @@ class TableEdit extends React.Component {
       data: []
     };    
   }
-  componentWillUnmount() {
+  componentDidUnmount() {
     this.loadUserDataById();
   }
 

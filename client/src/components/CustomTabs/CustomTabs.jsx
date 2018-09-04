@@ -54,8 +54,38 @@ class CustomTabs extends React.Component {
             scrollable
             scrollButtons="auto"
           >
+            {tabs.map((prop, key) => {
+              var icon = {};
+              if (prop.tabIcon) {
+                icon = {
+                  icon: <prop.tabIcon />
+                };
+              }
+              return (
+                <Tab
+                  classes={{
+                    root: classes.tabRootButton,
+                    labelContainer: classes.tabLabelContainer,
+                    label: classes.tabLabel,
+                    selected: classes.tabSelected,
+                    wrapper: classes.tabWrapper
+                  }}
+                  key={key}
+                  label={prop.tabName}
+                  {...icon}
+                />
+              );
+            })}
           </Tabs>
-        </CardHeader>        
+        </CardHeader>
+        <CardBody>
+          {tabs.map((prop, key) => {
+            if (key === this.state.value) {
+              return <div key={key}>{prop.tabContent}</div>;
+            }
+            return null;
+          })}
+        </CardBody>
       </Card>
     );
   }
