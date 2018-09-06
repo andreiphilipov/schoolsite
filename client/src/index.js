@@ -1,24 +1,17 @@
-import React from "react";
-import { createBrowserHistory } from "history";
+import React from 'react';
 import { render } from 'react-dom';
-import { Router, Route, Switch } from "react-router-dom";
-import "assets/css/material-dashboard-react.css?v=1.4.1";
-import indexRoutes from "routes/index.jsx";
+import { Provider } from 'react-redux';
+
+import { store } from './_helpers';
+import { App } from './App';
 
 // setup fake backend
-
-
-const hist = createBrowserHistory();
+import { configureFakeBackend } from './_helpers';
+configureFakeBackend();
 
 render(
-  <Router history={hist}>
-    <Switch>
-      {indexRoutes.map((prop, key) => {
-        return <Route path={prop.path} component={prop.component} key={key} />;
-      })}
-      {/* <privateRouter exact path="/" component={HomePage} /> */}
-    </Switch>
-  </Router>,
-  
-  document.getElementById("root")
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('app')
 );

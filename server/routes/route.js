@@ -103,7 +103,7 @@ router.post('/signup', (req, res, next) => {
     });
     
 
-    newContact.save((err, signup) => {
+    newSignup.save((err, signup) => {
         if (err) {
             res.json({ msg: 'Sorry. signup failed' });
         }

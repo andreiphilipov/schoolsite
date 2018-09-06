@@ -42,6 +42,7 @@ class SignUp extends React.Component {
   
 
   signupSubmit() {
+    
     var xhr = new XMLHttpRequest();
     var url = "http://localhost:3000/api/signup";
     var com_name = document.getElementById("com_name").value
@@ -53,7 +54,7 @@ class SignUp extends React.Component {
     var user_p_pwd = document.getElementById('user_p_pwd').value
     var card_num = document.getElementById('card_num').value
     var about_me = document.getElementById('about_me').value
-    
+    console.log(com_name);
     xhr.open("POST", url, true);
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.onreadystatechange = function () {
